@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
 
         // let c = JSON.stringify(b, null, 2);
 
-        fs.writeFile(`${title}.html`, data, (err) => {
+        fs.writeFile(`${title}`, data, (err) => {
           if (err) {
             console.log('Error');
           }
