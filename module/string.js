@@ -56,3 +56,5 @@ const string = {
     </html>`;
   },
 };
+
+module.exports = string;
