@@ -6,7 +6,7 @@
 
 const head = {
   200: (type) => {
-    return `200, { 'Contetn-Type': text/${type}; charset=utf-8 }`;
+    return { 'Contetn-Type': `'text/${type}; charset=utf-8'` };
   },
 };
 
