@@ -13,20 +13,22 @@ const string = require('./module/string.js');
  * ? list 폴더 안에 있는 파일 목록 읽어오기_완료
  * ? 읽어온 값을 빈 배열에 push_완료
  * ? main.html 내용 안에 listArr 넣은 파일 생성하고 읽기_완료
- * * for..in문을 통해 list폴더 안에 있는 html파일 읽기_진행 중
+ * ? for..in문을 통해 list폴더 안에 있는 html파일 읽기_완료
+ * ? POST, /comment 요청 받기_완료
+ * ? /comment 요청이 들어오면 commentArr 배열 안에 값 넣기_완료
+ * ! 문제점:서버를 열 때마다 댓글이 사라짐, json 파일에 comment의 값을 담아보자
  */
 
 const http = require('http');
 const qs = require('node:querystring');
 
+let commentArr = [];
 const server = http.createServer((req, res) => {
   // 한글로 된 주소의 암호를 풀어줌
   req.url = decodeURI(req.url);
   console.log('유효성 검사:', req.url);
 
   let listArr = [];
-
-  let commentArr = [];
 
   // 요청 메서드가 POST이고, 주소 뒤에가 /submit이면 실행
   if (req.method === 'POST' && req.url === '/submit') {
@@ -40,6 +42,7 @@ const server = http.createServer((req, res) => {
       let data = qs.parse(body);
       let title = data.title;
       let content = data.content;
+
       // 받아온 데이터를 토대로 파일 생성
       fileSystem.write(path.list(title), string.create(title, content, '댓글이 들어갈 자리'));
       // list폴더 안에 있는 파일 목록의 값을 배열로 나타남
