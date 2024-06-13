@@ -1,3 +1,4 @@
+const { sign } = require('crypto');
 const fileSystem = require('./module/fileSystem.js');
 const path = require('./module/path.js');
 const string = require('./module/string.js');
@@ -12,6 +13,7 @@ const string = require('./module/string.js');
  * ? list 폴더 안에 있는 파일 목록 읽어오기_완료
  * ? 읽어온 값을 빈 배열에 push_완료
  * ? main.html 내용 안에 listArr 넣은 파일 생성하고 읽기_완료
+ * * for..in문을 통해 list폴더 안에 있는 html파일 읽기_진행 중
  */
 
 const http = require('http');
@@ -38,14 +40,16 @@ const server = http.createServer((req, res) => {
       let content = data.content;
       // 받아온 데이터를 토대로 파일 생성
       fileSystem.write(path.list(title), string.create(title, content, '댓글이 들어갈 자리'));
-      // list 폴더 안에 있는 파일 목록 읽어옴
+      // list폴더 안에 있는 파일 목록의 값을 배열로 나타남
       let list = fileSystem.dir('./list');
       // listArr에 list[fileName] 값 넣음
       for (let fileName in list) {
-        listArr.push(list[fileName]);
+        // push 전 li, a tag 달기
+        let tag = `<li><a href="${list[fileName]}">${list[fileName].split('.html').join('')}</a></li>`;
+        listArr.push(tag);
       }
       //listArr의 값이 들어간 main.html 생성하고 읽음
-      fileSystem.write(path.none('main'), string.main(listArr.join('')));
+      fileSystem.write(path.none('main'), string.main(`<ul>${listArr.join('')}</ul>`));
       let frist = fileSystem.read(path.none('main'));
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(frist);
@@ -57,6 +61,10 @@ const server = http.createServer((req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);
+  }
+  let list = fileSystem.dir('./list');
+  for (let fileName in list) {
+    let a = list[fileName].split('.html').join('');
   }
 });
 
