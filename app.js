@@ -64,7 +64,17 @@ const server = http.createServer((req, res) => {
   }
   let list = fileSystem.dir('./list');
   for (let fileName in list) {
-    let a = list[fileName].split('.html').join('');
+    if (req.method === 'GET' && req.url === `/${list[fileName]}`) {
+      let a = list[fileName].split('.html').join('');
+      let data = fileSystem.read(path.list(a));
+
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    }
+  }
+  if (req.method === 'POST' && req.url === '/comment') {
+    let body = '';
+    req.on('data');
   }
 });
 
