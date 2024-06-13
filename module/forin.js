@@ -1,7 +1,8 @@
 const fileSystem = require('./fileSystem.js');
 /**
  * *24.06.13
- * * list폴더 안에 있는 파일을 읽고 for문을 통해 모든 값이 나타남
+ * * list폴더 안에 있는 파일을 읽고 for문을 통해 모든 값이 나타나게 함
+ * * 나온 값은 매개변수 array에 push
  * @param {*} array 빈 배열 (listArr)
  */
 const forIn = (array) => {
