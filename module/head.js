@@ -5,9 +5,7 @@
  */
 
 const head = {
-  200: (type) => {
-    return { 'Contetn-Type': `'text/${type}; charset=utf-8'` };
-  },
+  type: `{'Content-Type' : 'text/html; charset=utf-8'}`,
 };
 
 module.exports = head;
