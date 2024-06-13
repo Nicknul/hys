@@ -15,6 +15,9 @@ const path = {
   list: (path) => {
     return `./list/${path}.html`;
   },
+  JSON: (path) => {
+    return `./${path}.json`;
+  },
 };
 
 module.exports = path;
