@@ -26,6 +26,8 @@ const server = http.createServer((req, res) => {
 
   let listArr = [];
 
+  let commentArr = [];
+
   // 요청 메서드가 POST이고, 주소 뒤에가 /submit이면 실행
   if (req.method === 'POST' && req.url === '/submit') {
     let body = '';
@@ -80,7 +82,9 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       let data = qs.parse(body);
       let comment = data.comment;
-      console.log(comment);
+
+      commentArr.push(comment);
+      console.log(commentArr);
     });
   }
 });
