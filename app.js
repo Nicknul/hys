@@ -10,6 +10,8 @@ const string = require('./module/string.js');
  * ? POST, /submit 요청 받기_완료
  * ? /submit이면 list 폴더 안에 파일 생성_완료
  * ? list 폴더 안에 있는 파일 목록 읽어오기_완료
+ * ? 읽어온 값을 빈 배열에 push_완료
+ * ? main.html 내용 안에 listArr 넣은 파일 생성하고 읽기_완료
  */
 
 const http = require('http');
@@ -38,16 +40,19 @@ const server = http.createServer((req, res) => {
       fileSystem.write(path.list(title), string.create(title, content, '댓글이 들어갈 자리'));
       // list 폴더 안에 있는 파일 목록 읽어옴
       let list = fileSystem.dir('./list');
-
+      // listArr에 list[fileName] 값 넣음
       for (let fileName in list) {
         listArr.push(list[fileName]);
       }
-      console.log(listArr);
+      //listArr의 값이 들어간 main.html 생성하고 읽음
+      fileSystem.write(path.none('main'), string.main(listArr.join('')));
+      let frist = fileSystem.read(path.none('main'));
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(frist);
     });
   }
   // 요청 메서드가 GET이고 주소 뒤에가 /이라면 실행
   if (req.method === 'GET' && req.url === '/') {
-    fileSystem.write(path.none('main'), string.main('파일 목록이 들어갈 자리'));
     let data = fileSystem.read(path.none('main'));
 
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
