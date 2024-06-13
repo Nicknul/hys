@@ -74,7 +74,14 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/comment') {
     let body = '';
-    req.on('data');
+    req.on('data', (chunk) => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      let data = qs.parse(body);
+      let comment = data.comment;
+      console.log(comment);
+    });
   }
 });
 
