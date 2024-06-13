@@ -6,17 +6,31 @@ const fs = require('fs');
  * * readFileSync
  * * writeFileSync
  * * readdir
- *
- * @param {*} path path.js에 있는 모듈
- * @returns
  */
+
 const fileSystem = {
+  /**
+   *
+   * @param {*} path path.js 안에 있는 객체의 항목 값이 들어감
+   * @returns
+   */
   read: (path) => {
     return fs.readFileSync(path, 'utf-8');
   },
+  /**
+   *
+   * @param {*} path path.js 안에 있는 객체의 항목 값
+   * @param {*} data string.js 안에 있는 객체의 항목 값
+   * @returns
+   */
   write: (path, data) => {
     return fs.writeFileSync(path, data, 'utf-8');
   },
+  /**
+   *
+   * @param {*} path path.js 안에 있는 객체의 항목 값이 들어감
+   * @returns
+   */
   dir: (path) => {
     return fs.readdirSync(path, 'utf-8');
   },
