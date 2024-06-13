@@ -3,34 +3,18 @@ const fs = require('fs');
 /**
  * *2024.06.12
  * *2024.06.13 수정
- * * readFileSync
- * * writeFileSync
- * * readdir
+ * * 파일 읽기, 쓰기, 폴더 안에 있는 파일 목록 읽기를 실행할 obj
+ * @param {*} path : 파일 경로 (path.js)
+ * @param {*} data : 생성할 파일에 들어갈 data (string.js)
  */
 
 const fileSystem = {
-  /**
-   *
-   * @param {*} path path.js 안에 있는 객체의 항목 값이 들어감
-   * @returns
-   */
   read: (path) => {
     return fs.readFileSync(path, 'utf-8');
   },
-  /**
-   *
-   * @param {*} path path.js 안에 있는 객체의 항목 값
-   * @param {*} data string.js 안에 있는 객체의 항목 값
-   * @returns
-   */
   write: (path, data) => {
     return fs.writeFileSync(path, data, 'utf-8');
   },
-  /**
-   *
-   * @param {*} path path.js 안에 있는 객체의 항목 값이 들어감
-   * @returns
-   */
   dir: (path) => {
     return fs.readdirSync(path, 'utf-8');
   },
