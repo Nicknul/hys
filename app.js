@@ -8,7 +8,8 @@ const string = require('./module/string.js');
  * *2024.06.13
  * ? GET 요청이면 main.html 생성_완료
  * ? POST, /submit 요청 받기_완료
- * * /submit이면 list 폴더 안에 파일 생성_진행 중
+ * ? /submit이면 list 폴더 안에 파일 생성_완료
+ * * list 폴더 안에 있는 파일 목록 읽어오기_진행 중
  */
 
 const http = require('http');
@@ -30,6 +31,9 @@ const server = http.createServer((req, res) => {
       let content = data.content;
 
       fileSystem.write(path.list(title), string.create(title, content, '댓글이 들어갈 자리'));
+
+      //* list 폴더 안에 있는 파일 목록 읽어옴
+      let list = fileSystem.dir('./list');
     });
   }
   if (req.method === 'GET' && req.url === '/') {
