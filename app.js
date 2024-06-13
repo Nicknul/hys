@@ -1,9 +1,9 @@
 /**
  * *2024.06.12
- * * 서버 열기_완료
+ * ? 서버 열기_완료
  * *2024.06.13
  * ? GET 요청이면 main.html 생성_완료
- * * POST, /submit 요청 받기 _ 진행 중
+ * ? POST, /submit 요청 받기_완료
  */
 
 const http = require('http');
