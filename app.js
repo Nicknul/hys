@@ -10,6 +10,7 @@ const http = require('http');
 const fileSystem = require('./module/fileSystem.js');
 const path = require('./module/path.js');
 const string = require('./module/string.js');
+const head = require('./module/head.js');
 
 const server = http.createServer((req, res) => {
   req.url = decodeURI(req.url);
@@ -20,7 +21,7 @@ const server = http.createServer((req, res) => {
     fileSystem.write(path.none('main'), string.main('파일 목록이 들어갈 자리'));
     let data = fileSystem.read(path.none('main'));
 
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.writeHead(head.type);
     res.end(data);
   }
 });
